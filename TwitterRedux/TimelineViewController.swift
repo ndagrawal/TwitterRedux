@@ -44,10 +44,11 @@ class TimelineViewController: UIViewController,UICollectionViewDataSource,UIColl
             [NSForegroundColorAttributeName:UIColor.whiteColor()]) as? [String : AnyObject]
     }
 
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return tweets.count
     }
-    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = timeLineCollectionView.dequeueReusableCellWithReuseIdentifier("TweetTimelineCell", forIndexPath: indexPath) as! TweetTimeLineCollectionViewCell
         let tweet:Tweet = tweets[indexPath.row]
@@ -56,7 +57,6 @@ class TimelineViewController: UIViewController,UICollectionViewDataSource,UIColl
         cell.layer.borderWidth = 0.5
         cell.setTweetTimeCollectionViewCell(tweet)
         return cell
-        
     }
 
 

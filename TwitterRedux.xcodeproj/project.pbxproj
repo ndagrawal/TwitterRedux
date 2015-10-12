@@ -209,9 +209,6 @@
 		C46AAFCF1BC99F37005518E6 /* TwitterRedux */ = {
 			isa = PBXGroup;
 			children = (
-				C4E172231BCB5B0E00CFC1D9 /* favorite.png */,
-				C4E172251BCB5B1B00CFC1D9 /* reply.png */,
-				C4E172261BCB5B1B00CFC1D9 /* retweet.png */,
 				C46AAFD01BC99F37005518E6 /* AppDelegate.swift */,
 				C46AB0171BC9D6E3005518E6 /* View */,
 				C46AB0181BC9D705005518E6 /* MenuAndParentViewControllers */,
@@ -245,6 +242,9 @@
 		C46AB0161BC9D553005518E6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4E172231BCB5B0E00CFC1D9 /* favorite.png */,
+				C4E172251BCB5B1B00CFC1D9 /* reply.png */,
+				C4E172261BCB5B1B00CFC1D9 /* retweet.png */,
 				C46AB0071BC9B456005518E6 /* menu.png */,
 				C46AAFD41BC99F37005518E6 /* Main.storyboard */,
 				C46AAFD71BC99F37005518E6 /* Assets.xcassets */,

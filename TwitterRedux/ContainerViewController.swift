@@ -19,7 +19,6 @@ class ContainerViewController: UIViewController {
     var isOpening = false
     //Different View Controllers
 
-
     init(sideMenu: UIViewController, center: UIViewController) {
         menuViewController = sideMenu
         centerViewController = center
@@ -67,21 +66,25 @@ class ContainerViewController: UIViewController {
             isOpening = isOpen == 1.0 ? false: true
 
         case .Changed:
-            self.setToPercent(isOpening ? progress: (1.0 - progress))
+            let progessPercent = (isOpening ? progress: (1.0 - progress))
+            self.centerViewController.view.frame.origin.x = menuWidth * CGFloat(progessPercent)
+            self.menuViewController.view.frame.origin.x = menuWidth * CGFloat(progessPercent) - menuWidth
 
-        case .Ended: fallthrough
-        case .Cancelled: fallthrough
+        case .Ended:
+            print("Ended")
+        case .Cancelled:
+            print("Cancelled")
         case .Failed:
-
             var targetProgress: CGFloat
             if (isOpening) {
                 targetProgress = progress < 0.5 ? 0.0 : 1.0
             } else {
                 targetProgress = progress < 0.5 ? 1.0 : 0.0
             }
-
             UIView.animateWithDuration(animationTime, animations: {
-                self.setToPercent(targetProgress)
+                self.centerViewController.view.frame.origin.x = self.menuWidth * CGFloat(targetProgress)
+                self.menuViewController.view.frame.origin.x = self.menuWidth * CGFloat(targetProgress) - self.menuWidth
+
                 }, completion: { _ in
                     //
             })
@@ -95,15 +98,11 @@ class ContainerViewController: UIViewController {
         let targetProgress: CGFloat = isOpen == 1.0 ? 0.0: 1.0
 
         UIView.animateWithDuration(animationTime, animations: {
-            self.setToPercent(targetProgress)
+            self.centerViewController.view.frame.origin.x = self.menuWidth * CGFloat(targetProgress)
+            self.menuViewController.view.frame.origin.x = self.menuWidth * CGFloat(targetProgress) - self.menuWidth
             }, completion: { _ in
                 self.menuViewController.view.layer.shouldRasterize = false
         })
-    }
-
-    func setToPercent(percent: CGFloat) {
-        centerViewController.view.frame.origin.x = menuWidth * CGFloat(percent)
-        menuViewController.view.frame.origin.x = menuWidth * CGFloat(percent) - menuWidth
     }
 }
 

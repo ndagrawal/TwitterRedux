@@ -10,7 +10,6 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
-   // var containerViewController: CenterTwitterViewController!
     var centerViewController : CenterTwitterViewController!
     var containterViewController: ContainerViewController!
 
