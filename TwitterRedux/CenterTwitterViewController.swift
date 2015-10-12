@@ -11,7 +11,6 @@ import UIKit
 var storyboard = UIStoryboard(name:"Main",bundle:nil)
 class CenterTwitterViewController: UIViewController {
 
-    //View Controller Arrays ...
     var profileViewController:ProfileViewController!
     var timeLineViewController:TimelineViewController!
 
@@ -31,7 +30,6 @@ class CenterTwitterViewController: UIViewController {
         super.viewDidLoad()
         profileViewController = storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
         timeLineViewController = storyboard?.instantiateViewControllerWithIdentifier("TimelineViewController") as! TimelineViewController
-
         selectViewController(0)
         addNavigationController()
 
@@ -45,7 +43,6 @@ class CenterTwitterViewController: UIViewController {
         default:
             viewController = profileViewController
         }
-        //let viewController:UIViewController = viewControllers[selectedController]
         self.addChildViewController(viewController)
         self.view.addSubview(viewController.view)
         viewController.didMoveToParentViewController(self)

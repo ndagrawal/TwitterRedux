@@ -26,7 +26,6 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       // self.view.backgroundColor = UIColor.yellowColor()
         // Do any additional setup after loading the view.
 
         profileImage.setImageWithURL(NSURL(string: (User.currentUser!.profileImageURL)!))
@@ -34,10 +33,12 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         screenName.text = User.currentUser!.screenname
         profileTimeLineCollectionView.delegate = self
         profileTimeLineCollectionView.dataSource = self
+
         TwitterClient.sharedInstance.homeTimelineWithParams(nil,completion:{(tweets, error) -> () in
             self.tweets = tweets
             self.profileTimeLineCollectionView.reloadData()
         })
+
         setCollectionViewLayout()
         setNavigationController()
     }
@@ -51,23 +52,14 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
     }
 
     func setNavigationController(){
-
-      //  self.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Log Out", style: UIBarButtonItemStyle.Plain, target: self, action: "onLogOut")
-
         //Bar Color Setup
         self.navigationItem.title = "Profile"
         self.navigationController!.navigationBar.barTintColor = UIColor(red:0.33, green:0.67, blue:0.93, alpha:1.0)
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary.init(dictionary:
             [NSForegroundColorAttributeName:UIColor.whiteColor()]) as? [String : AnyObject]
-
     }
 
-
-
-
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-
         return tweets.count
     }
 
@@ -81,17 +73,4 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         cell.setTweetProfileCollectionViewCell(tweet)
         return cell
     }
-
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
