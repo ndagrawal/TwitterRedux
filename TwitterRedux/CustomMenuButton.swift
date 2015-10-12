@@ -23,7 +23,6 @@ class CustomMenuButton: UIView {
 
     override func didMoveToSuperview() {
         frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-
         imageView = UIImageView(image:UIImage(named:"menu"))
         imageView.userInteractionEnabled = true
         imageView.addGestureRecognizer(

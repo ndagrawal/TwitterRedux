@@ -16,7 +16,8 @@ class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = UIColor.grayColor()
+        
         self.view.userInteractionEnabled = true
         // Do any additional setup after loading the view.
     }
@@ -38,6 +39,10 @@ class MenuViewController: UIViewController {
         centerViewController.selectViewController(0)
     }
 
+    @IBAction func onLogOut(sender: AnyObject) {
+        User.currentUser?.logOut()
+    }
+    
     @IBOutlet weak var TimelineSelected: UIButton!
 
     @IBAction func TimeLineSelectedAction(sender: AnyObject) {
@@ -54,7 +59,7 @@ class MenuViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
+    }*/
 
+    
 }

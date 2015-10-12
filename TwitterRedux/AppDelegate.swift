@@ -12,25 +12,37 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var storyboard = UIStoryboard(name:"Main",bundle:nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        application.statusBarStyle = UIStatusBarStyle.LightContent
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let centerNav = storyboard.instantiateViewControllerWithIdentifier("MainNavigationControl") as! UINavigationController
-        let menuVC = storyboard.instantiateViewControllerWithIdentifier("LeftController") as! MenuViewController
-        menuVC.centerViewController = centerNav.viewControllers.first as! CenterTwitterViewController
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogOut", name: userDidLogOutNotification, object: nil)
+        print(" User == \(User.currentUser?.name)")
 
-        let containerVC = ContainerViewController(sideMenu: menuVC, center: centerNav)
+        if User.currentUser != nil{
+            print("Current User Detected")
+            application.statusBarStyle = UIStatusBarStyle.LightContent
 
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window!.rootViewController = containerVC
-        self.window!.backgroundColor = UIColor.whiteColor()
-        self.window!.makeKeyAndVisible()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let centerNav = storyboard.instantiateViewControllerWithIdentifier("MainNavigationControl") as! UINavigationController
+            let menuVC = storyboard.instantiateViewControllerWithIdentifier("LeftController") as! MenuViewController
+            menuVC.centerViewController = centerNav.viewControllers.first as! CenterTwitterViewController
+            let containerVC = ContainerViewController(sideMenu: menuVC, center: centerNav)
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            self.window!.rootViewController = containerVC
+            self.window!.backgroundColor = UIColor.whiteColor()
+            self.window!.makeKeyAndVisible()
+        }
+
         return true
     }
+
+    func userDidLogOut() {
+        let vc  = storyboard.instantiateInitialViewController() as UIViewController?
+        window?.rootViewController = vc
+    }
+
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -54,6 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        TwitterClient.sharedInstance.openURL(url)
+        return true
+    }
 
 }
 

@@ -8,13 +8,12 @@
 
 import UIKit
 
+var storyboard = UIStoryboard(name:"Main",bundle:nil)
 class CenterTwitterViewController: UIViewController {
 
     //View Controller Arrays ...
-    var viewControllers:[UIViewController]=[
-        ProfileViewController.init(nibName:nil,bundle:nil),
-        TimelineViewController.init(nibName: nil, bundle: nil)
-    ]
+    var profileViewController:ProfileViewController!
+    var timeLineViewController:TimelineViewController!
 
     func addNavigationController(){
         menuButton = CustomMenuButton()
@@ -30,12 +29,23 @@ class CenterTwitterViewController: UIViewController {
     var menuButton:CustomMenuButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        profileViewController = storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        timeLineViewController = storyboard?.instantiateViewControllerWithIdentifier("TimelineViewController") as! TimelineViewController
+
         selectViewController(0)
         addNavigationController()
+
     }
 
     func selectViewController(selectedController : Int){
-        let viewController:UIViewController = viewControllers[selectedController]
+        var viewController:UIViewController!
+        switch selectedController{
+        case 1:
+            viewController = timeLineViewController
+        default:
+            viewController = profileViewController
+        }
+        //let viewController:UIViewController = viewControllers[selectedController]
         self.addChildViewController(viewController)
         self.view.addSubview(viewController.view)
         viewController.didMoveToParentViewController(self)
