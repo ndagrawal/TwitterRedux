@@ -9,4 +9,6 @@ Required
 [Done] The menu can look similar to the LinkedIn menu below or feel free to take liberty with the UI.  
 [Done] Profile page  
 [Done] Contains the user header view  
-[Done] Contains a section with the users basic stats: # tweets, # following, # followers  
+[Done] Contains a section with the users basic stats: # tweets, # following, # followers    
+
+![alt tag](http://g.recordit.co/81NFWS0VSm.gif)
